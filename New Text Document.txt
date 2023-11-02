@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Tagug National High School</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333; /* Adjust text color */
+}
+
+h1 {
+    font-size: 28px;
+    color: #007acc; /* Adjust heading color */
+}
+
+h2 {
+    font-size: 24px;
+    color: #333; /* Adjust heading color */
+}
+
+p {
+    font-size: 18px;
+    color: #555; /* Adjust text color */
+}
+
+        
+        /* Create a separate div for the background image with opacity */
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5; /* 50% opacity */
+            background-image: url('assets/20200721_100926.jpg'); /* Replace 'path-to-your-image.jpg' with the actual image path */
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .dark-mode-switch {
+            position: fixed;
+            bottom: 75px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            color: white;
+            transition: transform 1.3s; 
+        }
+
+        .dark-mode-switch:hover {
+            transform: scale(1.1); /* Scale up on hover */
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        .dark-mode {
+            background-color: #222; /* Dark mode background color */
+            color: black;
+        }
+
+        .dark-mode-switch .slider {
+            background-color: #555; /* Dark mode switch background color */
+        }
+
+        .dark-mode-switch .slider:before {
+            background-color: #f1f1f1; /* Dark mode switch knob color */
+        }
+
+        .dark-mode-switch span {
+            margin-left: 8px;
+        }
+
+        /* Add background color to each message box */
+        .message-box {
+            border: 5px inset #333;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+            background-color: white; /* Default background color */
+            border-radius: 20px;
+        }
+
+        /* Apply background color for message boxes in dark mode */
+        .dark-mode .message-box {
+            background-color: #3b444b; /* Background color in dark mode */
+            color: black; /* Text color in dark mode */
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #3b444b;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .popup h2 {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 0 15px;
+        }
+
+        .popup p {
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .popup button {
+            background-color: #59CD4F;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup button:hover {
+            background-color: #007acc;
+            color: #fff;
+        }
+
+        .offer-container {
+            width: 975px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .strands {
+text-align: left;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .offer-container:hover .strands {
+            max-height: 1000px; /* Adjust the maximum height as needed */
+        }
+
+        .offer-container:hover .strands {
+            max-height: 300px;
+            transition: max-height 0.3s ease-in-out;
+            scroll-margin-top: 100px; /* Add this line to adjust the scroll position */
+        }
+
+.content {
+    background-color: rgba(197, 218, 255, 0.75);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 0;
+width: 80%;
+max-height: 90%;
+}
+
+@media screen and (max-width: 800px) {
+    .content {
+        max-width: 100%; /* Allow the content to take the full width of the screen */
+    }
+}
+
+.section {
+    display: flex;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin: 20px;
+    transition: background-color 0.3s;
+}
+
+/* Dark Mode */
+.dark-mode .section {
+    background-color: #222;
+    color: white;
+}
+
+.left-section {
+    justify-content: flex-start;
+}
+
+.right-section {
+    justify-content: flex-end;
+}
+
+        .section {
+            display: flex;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .section img {
+            width: 100px;
+            height: auto;
+            margin-left: 10px;
+        }
+
+        .left-section {
+            justify-content: flex-start;
+        }
+
+        .right-section {
+            justify-content: flex-end;
+        }
+
+    </style>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle("dark-mode");
+            const largeImage = document.getElementById("large-image"); // Define largeImage here
+            if (body.classList.contains("dark-mode")) {
+                // Change the image source to the dark mode image
+                largeImage.src = "assets/topbar.png"; // Replace with the path to your dark mode image
+            } else {
+                // Change the image source back to the original image
+                largeImage.src = "assets/topba.png"; // Replace with the path to your original image
+            }
+        }
+function showProfilePopup() {
+    const popup = document.getElementById("profile-popup");
+    popup.style.display = "block";
+}
+
+function closeProfilePopup() {
+    const popup = document.getElementById("profile-popup");
+    popup.style.display = "none";
+}
+
+    </script>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="profile-popup" class="popup" style="display: none;">
+        <h2>Hi, Prince Dale!</h2>
+        <p>Full name: Prince Dale Limosnero<br>LRN: 162214078<br>Current Grade & Section: 11 - ICT A<br>Birth Date: September 09, 2007<br>Current Adviser: Mrs. Cheryll O. Lanuzga</p>
+        <button onclick="closeProfilePopup()">Close</button>
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="offered.html">Programs & Offerings</a></li>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#" onmouseover="showProfilePopup()">Your Name</a></li>
+        </ul>
+    </div>
+    <div class="dark-mode-switch">
+        <label class="switch">
+            <input type="checkbox" onclick="toggleDarkMode()">
+            <span class="slider round"></span>
+        </label>
+        <span>Dark Mode</span>
+    </div>
+    <div class="content">
+        <img id="large-image" src="assets/topba.png" alt="TNHS Logo" width="1100" height="80">
+
+
+    <!-- Section 1: Left Title and Description, Right Pictures -->
+    <div class="section left-section">
+        <div class="left-content">
+            <h1>Title 1</h1>
+            <p>Description for the first section goes here.</p>
+        </div>
+        <div class="right-content">
+            <img src="image1.jpg" alt="Image 1">
+            <img src="image2.jpg" alt="Image 2">
+            <img src="image3.jpg" alt="Image 3">
+        </div>
+    </div>
+
+    <!-- Section 2: Right Title and Description, Left Pictures -->
+    <div class="section right-section">
+        <div class="left-content">
+            <h1>Title 2</h1>
+            <p>Description for the second section goes here.</p>
+        </div>
+        <div class="right-content">
+            <img src="image4.jpg" alt="Image 4">
+            <img src="image5.jpg" alt="Image 5">
+            <img src="image6.jpg" alt="Image 6">
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Taguig National High School</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+h1 {
+    font-size: 28px;
+    color: #007acc;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background-image: url('assets/20200721_100926.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.dark-mode-switch {
+    position: fixed;
+    bottom: 75px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    color: white;
+    transition: transform 1.3s;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.dark-mode {
+    background-color: #222;
+    color: black;
+}
+
+.dark-mode-switch .slider {
+    background-color: #555;
+}
+
+.dark-mode-switch .slider:before {
+    background-color: #f1f1f1;
+}
+
+.dark-mode-switch span {
+    margin-left: 8px;
+}
+
+.message-box {
+    border: 5px inset #333;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.dark-mode .message-box {
+    background-color: #3b444b;
+    color: black;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #3b444b;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.popup h2 {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 0 15px;
+}
+
+.popup p {
+    color: #fff;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.popup button {
+    background-color: #59CD4F;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup button:hover {
+    background-color: #007acc;
+    color: #fff;
+}
+
+.offer-container {
+    width: 975px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.strands {
+    text-align: left;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.offer-container:hover .strands {
+    max-height: 1000px;
+}
+
+.offer-container:hover .strands {
+    max-height: 300px;
+    transition: max-height 0.3s ease-in-out;
+    scroll-margin-top: 100px;
+}
+
+.content {
+    background-color: rgba(197, 218, 255, 0.75);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 0;
+    width: 80%;
+    max-height: 90%;
+}
+
+@media screen and (max-width: 800px) {
+    .content {
+        max-width: 100%;
+    }
+}
+
+.section {
+    display: flex;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin: 20px;
+    transition: background-color 0.3s;
+}
+
+.dark-mode .section {
+    background-color: #222;
+    color: white;
+}
+
+.left-section {
+    justify-content: flex-start;
+}
+
+.right-section {
+    justify-content: flex-end;
+}
+
+.section img {
+    width: 100px;
+    height: auto;
+    margin-left: 10px;
+}
+
+.left-section {
+    justify-content: flex-start;
+}
+
+.right-section {
+    justify-content: flex-start;
+}
+
+.dark-mode .section .left-content p {
+    color: white;
+}
+
+.left-section {
+    justify-content: flex-start;
+}
+
+.right-section {
+    justify-content: flex-start;
+}
+
+.section img {
+    transition: transform 0.3s;
+    display: block;
+}
+
+.section img:hover {
+    transform: scale(1.1);
+}
+
+.zoomed {
+    transform: scale(10);
+    transition: transform 0.3s;
+    z-index: 1;
+}
+
+.section .right-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section .right-content .images {
+    margin-top: 20px;
+}
+
+.section .right-content .images img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+}
+
+.section.left-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.section.left-section .left-content {
+    margin-bottom: 20px;
+}
+
+.section.left-section .right-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.zoomed img {
+    width: auto;
+    height: 80vh;
+    max-width: 80vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    cursor: zoom-out;
+}
+
+        .profile-picture {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-left: 30px;
+margin-top: 253px;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+    </style>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle("dark-mode");
+            const largeImage = document.getElementById("large-image");
+            if (body.classList.contains("dark-mode")) {
+                largeImage.src = "assets/topbar.png";
+            } else {
+                largeImage.src = "assets/topba.png";
+            }
+        }
+function showProfilePopup() {
+    const popup = document.getElementById("profile-popup");
+    popup.style.display = "block";
+}
+
+function closeProfilePopup() {
+    const popup = document.getElementById("profile-popup");
+    popup.style.display = "none";
+}
+
+const zoomImages = document.querySelectorAll('.zoom-image');
+
+zoomImages.forEach(image => {
+    image.addEventListener('click', () => {
+        image.classList.toggle('zoomed');
+    });
+
+    image.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        image.classList.remove('zoomed');
+    });
+});
+    </script>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="profile-popup" class="popup" style="display: none;">
+        <h2>Hi, Prince Dale!</h2>
+        <p>Full name: Prince Dale Limosnero<br>LRN: 162214078<br>Current Grade & Section: 11 - ICT A<br>Birth Date: September 09, 2007<br>Current Adviser: Mrs. Cheryll O. Lanuzga</p>
+        <button onclick="closeProfilePopup()">Close</button>
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="offered.html">Programs & Offerings</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="aboutTEST.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="pics.html">Inside The Campus</a></li>
+                <div class="profile-picture">
+                    <img src="assets/profile_placeholder.jpg" alt="Profile Picture">
+                </div>
+<li><a href="#" id="profile-link" onclick="showProfilePopup()">Your Name</a></li>
+        </ul>
+    </div>
+    <div class="dark-mode-switch">
+        <label class="switch">
+            <input type="checkbox" onclick="toggleDarkMode()">
+            <span class="slider round"></span>
+        </label>
+        <span>Dark Mode</span>
+    </div>
+    <div class="content">
+        <img id="large-image" src="assets/topba.png" alt="TNHS Logo" width="1100" height="80">
+    <div class="section right-section">
+<h1>C  O  N  T  A  C  TㅤU  S</h1>
+</div>
+
+
+    <div class="section left-section">
+<a href="https://www.facebook.com/taguignationalhs1980"><h1>Taguig National High School FB Page</h1></a>
+        <div class="left-content">
+</div>
+<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ftaguignationalhs1980&tabs=timeline&width=350&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="350" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+</div>
+
+
+<div class="section left-section">
+<h1> ADDITIONAL INFORMATIONS </h1>
+<h2><strong>Contact Number:  </strong>288467242 <br><strong>Email:  </strong>305460@deped.gov.ph
+</h2>
+</div>
+
+    <div class="section left-section">
+<h1> TAGUIG NATIONAL HIGH SCHOOL SUB-ACCOUNTS </h1>
+<a href="https://www.facebook.com/profile.php?id=100086477043947&mibextid=ZbWKwL"><h1>TNHS SPORTS CLUB</h1></a>
+<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100086477043947%26mibextid%3DZbWKwL&tabs=timeline&width=350&height=350&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="350" height="350" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+<BR>
+<a href="https://www.facebook.com/TNHSMathDept?mibextid=ZbWKwL"><h1>TNHS MATHEMATICS CLUB</h1></a>
+<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FTNHSMathDept%3Fmibextid%3DZbWKwL&tabs=timeline&width=350&height=350&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="350" height="350" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+<br>
+<a href="https://www.facebook.com/TaguigNationalHighSchoolCOMELEC?mibextid=ZbWKwL"><h1>TNHS SSG COMSELEC</h1></a>
+<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FTaguigNationalHighSchoolCOMELEC%3Fmibextid%3DZbWKwL&tabs=timeline&width=350&height=350&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="350" height="350" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+<BR>
+<a href="https://www.facebook.com/profile.php?id=100085827825816&mibextid=ZbWKwL"><h1>TNHS EMPLOYEES CLUB INC</h1></a>
+<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100085827825816%26mibextid%3DZbWKwL&tabs=timeline&width=350&height=350&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="350" height="350" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+<BR>
+<a href="https://www.facebook.com/tnhstleclub?mibextid=ZbWKwL"><h1>TNHS TLE CLUB</h1></a>
+<hr>
+<p>CONTACT US: tnhs.tle.club@gmail.com</p>
+<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ftnhstleclub%3Fmibextid%3DZbWKwL&tabs=timeline&width=350&height=350&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="350" height="350" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+</div>
+
+    <footer>
+        <p>&copy; 2023 PD Sites</p>
+    </footer>
+</body>
+</html>

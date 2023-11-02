@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Taguig National High School</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            background-image: url('assets/20200721_100926.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .dark-mode-switch {
+            position: fixed;
+            bottom: 75px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            color: white;
+            transition: transform 1.3s;
+        }
+
+        .dark-mode-switch:hover {
+            transform: scale(1.1);
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        .dark-mode {
+            background-color: #222;
+            color: white;
+        }
+
+        .dark-mode-switch .slider {
+            background-color: #555;
+        }
+
+        .dark-mode-switch .slider:before {
+            background-color: #f1f1f1;
+        }
+
+        .dark-mode-switch span {
+            margin-left: 8px;
+        }
+
+        .message-box {
+            border: 5px inset #333;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+            background-color: white;
+            border-radius: 20px;
+        }
+
+        .dark-mode .message-box {
+            background-color: #3b444b;
+            color: white;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #3b444b;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .popup h2 {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 0 15px;
+        }
+
+        .popup p {
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .popup button {
+            background-color: #59CD4F;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup button:hover {
+            background-color: #007acc;
+            color: #fff;
+        }
+
+        .offer-container {
+            width: 300px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .strands {
+            text-align: left;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .offer-container:hover .strands {
+            max-height: 300px;
+        }
+
+        .profile-picture {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-left: 30px;
+margin-top: 290px;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+
+    </style>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle("dark-mode");
+            const largeImage = document.getElementById("large-image");
+            if (body.classList.contains("dark-mode")) {
+                largeImage.src = "assets/topbar.png";
+            } else {
+                largeImage.src = "assets/topba.png";
+            }
+        }
+
+        function showProfilePopup() {
+            const popup = document.getElementById("profile-popup");
+            popup.style.display = "block";
+        }
+
+        function closeProfilePopup() {
+            const popup = document.getElementById("profile-popup");
+            popup.style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="profile-popup" class="popup" style="display: none;">
+        <h2>Hi, Prince Dale!</h2>
+        <p>Full name: Prince Dale Limosnero<br>LRN: 162214078<br>Current Grade & Section: 11 - ICT A<br>Birth Date: September 09, 2007<br>Current Adviser: Mrs. Cheryll O. Lanuzga</p>
+        <button onclick="closeProfilePopup()">Close</button>
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="offered.html">Programs & Offerings</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="aboutTEST.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="pics.html">Inside The Campus</a></li>
+                <div class="profile-picture">
+                    <img src="assets/profile_placeholder.jpg" alt="Profile Picture">
+                </div>
+            <li><a href="#" onclick="showProfilePopup()">Your Name</a></li>
+        </ul>
+    </div>
+    <div class="dark-mode-switch">
+        <label class="switch">
+            <input type="checkbox" onclick="toggleDarkMode()">
+            <span class="slider round"></span>
+        </label>
+        <span>Dark Mode</span>
+    </div>
+    <div class="content">
+        <div id="image-container" style="text-align: center;">
+            <img id="large-image" src="assets/topba.png" alt="TNHS LOGO" width="1100" height="80">
+        </div>
+        <div class="offer-container">
+            <h3>WE OFFER</h3>
+            <div class="strands">
+                <ul>
+                    <li>Junior High School</li>
+                    <li>Senior High School</li>
+                    <li>Alternative Learning System (ALS)</li>
+                    <li>Inclusive Education Program</li>
+                    <li>Open High School Program</li>
+                    <li>ALIVE Madrasah</li>
+                </ul>
+            </div>
+        </div>
+        <br>
+        <div class="offer-container">
+            <h3>STRANDS</h3>
+            <div class="strands">
+                <ul>
+                    <p><strong>ACADEMIC TRACK</strong></p>
+                    <li>STEM</li>
+                    <li>HUMSS</li>
+                    <li>ABM</li>
+                    <li>GAS</li>
+                </ul>
+                <ul>
+                    <p><strong>TVL TRACK</strong></p>
+                    <li>ICT</li>
+                    <li>HOME ECONOMICS</li>
+                    <li>AUTOMOTIVE</li>
+                    <li>SMAW</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

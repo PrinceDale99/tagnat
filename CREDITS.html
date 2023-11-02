@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Taguig National High School</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+h1 {
+    font-size: 28px;
+    color: #007acc;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background-image: url('assets/20200721_100926.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.dark-mode-switch {
+    position: fixed;
+    bottom: 75px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    color: white;
+    transition: transform 1.3s;
+}
+
+.dark-mode-switch:hover {
+    transform: scale(1.1);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.dark-mode {
+    background-color: #222;
+    color: black;
+}
+
+.dark-mode-switch .slider {
+    background-color: #555;
+}
+
+.dark-mode-switch .slider:before {
+    background-color: #f1f1f1;
+}
+
+.dark-mode-switch span {
+    margin-left: 8px;
+}
+
+.message-box {
+    border: 5px inset #333;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.dark-mode .message-box {
+    background-color: #3b444b;
+    color: black;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #3b444b;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.popup h2 {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 0 15px;
+}
+
+.popup p {
+    color: #fff;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.popup button {
+    background-color: #59CD4F;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup button:hover {
+    background-color: #007acc;
+    color: #fff;
+}
+
+.offer-container {
+    width: 975px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.strands {
+    text-align: left;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.offer-container:hover .strands {
+    max-height: 1000px;
+}
+
+.offer-container:hover .strands {
+    max-height: 300px;
+    transition: max-height 0.3s ease-in-out;
+    scroll-margin-top: 100px;
+}
+
+.content {
+    background-color: rgba(197, 218, 255, 0.75);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 0;
+    width: 80%;
+    max-height: 90%;
+}
+
+@media screen and (max-width: 800px) {
+    .content {
+        max-width: 100%;
+    }
+}
+
+    </style>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle("dark-mode");
+            const largeImage = document.getElementById("large-image");
+            if (body.classList.contains("dark-mode")) {
+                largeImage.src = "assets/topbar.png";
+            } else {
+                largeImage.src = "assets/topba.png";
+            }
+        }
+
+        function showProfilePopup() {
+            const popup = document.getElementById("profile-popup");
+            popup.style.display = "block";
+        }
+
+        function closeProfilePopup() {
+            const popup = document.getElementById("profile-popup");
+            popup.style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="profile-popup" class="popup" style="display: none;">
+        <h2>Hi, Prince Dale!</h2>
+        <p>Full name: Prince Dale Limosnero<br>LRN: 162214078<br>Current Grade & Section: 11 - ICT A<br>Birth Date: September 09, 2007<br>Current Adviser: Mrs. Cheryll O. Lanuzga</p>
+        <button onclick="closeProfilePopup()">Close</button>
+    </div>
+    <div class="menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="offered.html">Programs & Offerings</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="aboutTEST.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="pics.html">Inside The Campus</a></li>
+            <li><a href="#" onmouseover="showProfilePopup()">Your Name</a></li>
+        </ul>
+    </div>
+    <div class="dark-mode-switch">
+        <label class="switch">
+            <input type="checkbox" onclick="toggleDarkMode()">
+            <span class="slider round"></span>
+        </label>
+        <span>Dark Mode</span>
+    </div>
+    <div class="content">
+        <img id="large-image" src="assets/topba.png" alt="TNHS Logo" width="1100" height="80">
+<h1>C R E D I T S</h1>
+<h3>Programmed(JavaScript), Designed(CSS), Coded(HTML) by Prince Dale Limosnero</h3><br>
+<h3>Contents provided by Lei Ann Dacuray & Princess Smilefalco</h3><br>
+<h3>Info from About Us Page are from Wikipedia</h3><br>
+<h3>Pics on Inside the Campus page are from Google Maps (other pics shot by Prince Dale Limosnero)/h3>
+
+
+    </div>
+</body>
+</html>
